@@ -46,7 +46,3 @@
 
 ### CALCULO DE FRETE
 - POST /freight
-
-## Executar testes automatizados
-
-Instale os pacotes com "npm install" e execute o comando "npm test".

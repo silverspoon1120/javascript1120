@@ -1,11 +1,5 @@
-let envPath;
-
-if(process.env.NODE_ENV == 'test') envPath = '.env.test';
-else if(process.env.NODE_ENV == 'production') envPath = '.env';
-else envPath = '.env.dev';
-
 require('dotenv').config({
-    path: envPath
+    path: process.env.NODE_ENV === 'test' ? '.env.test' : '.env'
 });
 
 const express = require('express');
