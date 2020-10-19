@@ -2,8 +2,6 @@ const express = require('express');
 //const axios = require('axios');
 const pagarme = require('pagarme');
 
-const { emitNewOrder } = require('../../websocket/socketConnection');
-
 const OrderModel = require('../../models/OrderModel');
 const UserModel = require('../../models/UserModel');
 const ProductModel = require('../../models/ProductModel');
@@ -163,24 +161,6 @@ module.exports = async (req, res) => {
                 api_key: process.env.PAGARME_API_KEY,
                 ...req.body.boleto
             });*/
-        }
-
-        if(process.env.NODE_ENV != 'test'){
-
-            const newOrder = await OrderModel.findOne({
-                where: {
-                    id: order.id
-                },
-                include: {
-                    association: 'products',
-                    attributes: ['id', 'title'],
-                    through: { 
-                        attributes: ['quantity_buyed', 'product_price', 'product_discount_percent'] 
-                    },
-                }
-            });
-        
-            emitNewOrder(newOrder);
         }
         
         return res.json({ order, pagarme: response /*response.data*/ });
