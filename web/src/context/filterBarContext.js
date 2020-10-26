@@ -3,43 +3,32 @@ import { useRouter } from 'next/router';
 
 import api from '../services/api';
 
-interface IProps {
-    children: React.ReactNode;
-}
-
-export interface ICategory {
-    id: number;
-    name: string;
-    parent_id: number;
-}
-
-interface IUseFilterBar {
-    getSearchBarText: string;
-    setSearchBarText: React.Dispatch<string>;
-    getCategories: ICategory[];
-}
-
 const Context = createContext({});
 
-export function FilterBarContextProvider({ children }: IProps){
+export function FilterBarContextProvider({ children }){
 
     const [getSearchBarText, setSearchBarText] = useState('');
-    const [getCategories, setCategories] = useState<ICategory[]>([]);
+    const [getCategories, setCategories] = useState([]);
 
     const router = useRouter();
 
     useEffect( () => {
+
         fetchCategories();
+
     }, []);
 
     useEffect( () => {
+
         if(router.route == '/' || router.query.categoryId){
 
             setSearchBarText('');
         }
+        
     }, [router.route, router.query]);
 
     async function fetchCategories(){
+
         try {
 
             const respose = await api.get('/categories');
@@ -64,7 +53,7 @@ export function FilterBarContextProvider({ children }: IProps){
 
 export function useFilterBar(){
 
-    const context = useContext(Context) as IUseFilterBar;
+    const context = useContext(Context);
 
     return context;
 }

@@ -9,9 +9,9 @@ import noImg from '../assets/img-n-disp.png';
 
 import formatZipCode from '../utils/formatZipCode';
 
-import { useUser } from '../contexts/userContext';
-import { useCart } from '../contexts/cartContext';
-import { useOrder } from '../contexts/orderContext';
+import { useUser } from '../context/userContext';
+import { useCart } from '../context/cartContext';
+import { useOrder } from '../context/orderContext';
 
 export default function Cart() {
 
