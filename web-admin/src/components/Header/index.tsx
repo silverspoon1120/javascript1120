@@ -25,23 +25,19 @@ export default function Header() {
         <Container>
 
             <div>
-                {themeContext.getTheme.title == 'dark'
-                    ? (
-                        <button 
-                            type='button'
-                            onClick={() => themeContext.changeThemeTo('light')}
-                        >
-                            Claro
-                        </button>
-                    ) : (
-                        <button 
-                            type='button'
-                            onClick={() => themeContext.changeThemeTo('dark')}
-                        >
-                            Escuro
-                        </button>
-                    )
-                }
+                <button 
+                    type='button'
+                    onClick={() => themeContext.changeThemeTo('light')}
+                >
+                    Claro
+                </button>
+
+                <button 
+                    type='button'
+                    onClick={() => themeContext.changeThemeTo('dark')}
+                >
+                    Escuro
+                </button>
 
             </div>
 
