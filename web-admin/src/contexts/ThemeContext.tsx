@@ -5,8 +5,7 @@ import darkTheme from '../styles/darkTheme';
 import lightTheme from '../styles/lightTheme';
 
 interface IThemeHook {
-    changeThemeTo: (theme: "dark" | "light") => void;
-    getTheme: typeof darkTheme;
+    changeThemeTo: (theme: "dark" | "light") => void
 }
 
 interface ThemeContextProviderProps {
@@ -29,7 +28,6 @@ export function ThemeContextProvider({ children }: ThemeContextProviderProps){
         <Context.Provider 
             value={{ 
                 changeThemeTo,
-                getTheme
             }}
         >
             <ThemeProvider theme={getTheme}>
