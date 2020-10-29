@@ -1,78 +1,18 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 
-import { IProduct } from '../pages/[productId]';
-
-interface IProps {
-    children: React.ReactNode;
-}
-
-interface ICartItem {
-    id: number;
-    qtd: number;
-}
-
-interface iFreightMeasures {
-    weight: string;
-    length: string;
-    height: string;
-    width: string;
-}
-
-interface IFreights {
-    pac: {
-        "Valor": string;
-        "PrazoEntrega": string;
-        "MsgErro": {
-            [key: string]: any;
-        };
-    };
-    sedex: {
-        "Valor": string;
-        "PrazoEntrega": string;
-        "MsgErro": {
-            [key: string]: any;
-        };
-    }
-}
-
-interface IUseCart {
-    getCart: ICartItem[]; 
-    setCart: React.Dispatch<React.SetStateAction<ICartItem[]>>; 
-    addToCart: (newProduct: ICartItem) => void; 
-    removeFromCart: (id: number) => void;
-    getProducts: IProduct[];
-    setProducts: React.Dispatch<React.SetStateAction<IProduct[]>>;
-    getSubtotalPrice: number;
-    setSubtotalPrice: React.Dispatch<React.SetStateAction<number>>;
-    getTotalPrice: number;
-    setTotalPrice: React.Dispatch<React.SetStateAction<number>>;
-    getZipCode: string;
-    setZipCode: React.Dispatch<React.SetStateAction<string>>;
-    getFreightSelected: "pac" | "sedex" | null;
-    setFreightSelected: React.Dispatch<React.SetStateAction<string | null>>;
-    getFreightPrice: IFreights | null;
-    setFreightPrice: React.Dispatch<React.SetStateAction<IFreights | null>>;
-    getAddressId: number | null;
-    setAddressId: React.Dispatch<React.SetStateAction<number | null>>;
-    getFreightMeasures: iFreightMeasures | null;
-    setFreightMeasures: React.Dispatch<React.SetStateAction<iFreightMeasures | null>>;
-    orderFinished: () => void;
-    resetFreight: () => void;
-}
-
 const Context = createContext({});
 
-export function CartContextProvider({ children }: IProps){
+export function CartContextProvider({ children }){
 
-    const [getCart, setCart] = useState<ICartItem[]>([]);
-    const [getProducts, setProducts] = useState<IProduct[]>([]);
+    const [getCart, setCart] = useState([]);
+    const [getProducts, setProducts] = useState([]);
     const [getSubtotalPrice, setSubtotalPrice] = useState(0);
     const [getTotalPrice, setTotalPrice] = useState(0);
     const [getZipCode, setZipCode] = useState('');
-    const [getFreightSelected, setFreightSelected] = useState<string | null>(null);
-    const [getFreightPrice, setFreightPrice] = useState<number | null>(null);
-    const [getAddressId, setAddressId] = useState<number | null>(null);
-    const [getFreightMeasures, setFreightMeasures] = useState<iFreightMeasures | null>(null);
+    const [getFreightSelected, setFreightSelected] = useState(null);
+    const [getFreightPrice, setFreightPrice] = useState(null);
+    const [getAddressId, setAddressId] = useState(null);
+    const [getFreightMeasures, setFreightMeasures] = useState(null);
 
     useEffect( () => {
         
@@ -82,9 +22,9 @@ export function CartContextProvider({ children }: IProps){
 
     }, [])
 
-    function addToCart(newProduct: ICartItem){
+    function addToCart(newProduct){
 
-        const cart = [];
+        let cart = [];
         let findIt = false;
 
         if(getCart.length > 0){
@@ -115,7 +55,7 @@ export function CartContextProvider({ children }: IProps){
         setCart(cart);
     }
 
-    function removeFromCart(id: number){
+    function removeFromCart(id){
 
         resetFreight();
 
@@ -174,7 +114,7 @@ export function CartContextProvider({ children }: IProps){
 
 export function useCart(){
 
-    const context = useContext(Context) as IUseCart;
+    const context = useContext(Context);
 
     return context;
 }

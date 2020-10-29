@@ -1,5 +1,8 @@
 
-export default function validateCpf(cpf: string | number) {
+/**
+ * @param {string | number} cpf 
+ */
+export default function validateCpf(cpf) {
 
     cpf = String(cpf).replace('.', '').replace('.', '').replace('-', '');
     
@@ -36,7 +39,7 @@ export default function validateCpf(cpf: string | number) {
 
     const first = (soma*10)%11;
 
-    if(first != Number(cpf[9])) return false;
+    if(first != cpf[9]) return false;
     
     soma = 0;
     i = 0;
@@ -55,7 +58,7 @@ export default function validateCpf(cpf: string | number) {
     
     const second = (soma*10)%11;
 
-    if(second != Number(cpf[10])) return false;
+    if(second != cpf[10]) return false;
     
     return true;
 }
