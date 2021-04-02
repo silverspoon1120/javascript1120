@@ -37,21 +37,21 @@ export const Container = styled.section`
 
     tbody tr {
         background: ${props => props.theme.secondary};
-
-        &.out-of-stock {
-            background: ${props => props.theme.danger};
-        }
     }
 
     tbody tr + tr td {
         border-top: 1px solid ${props => props.theme.background};
     }
 
+    .td-image {
+        text-align: center;
+    }
+
     .td-image img {
-        width: 100px;
+        width: auto;
         height: 50px;
         vertical-align: middle;
-        object-fit: cover;
+        padding: 1px 0;
     }
 
     .td-name .over-hidden {
@@ -94,18 +94,11 @@ export const Container = styled.section`
     }
 
     .td-qtd button {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-
         width: 20px; 
         height: 20px;
-
         margin: 0 10px;
-
-        border: 1px solid #111;
+        border: 0;
         border-radius: 2px;
-        
         font-weight: bold;
         cursor: pointer;
 
