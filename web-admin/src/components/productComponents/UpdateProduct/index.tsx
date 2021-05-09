@@ -68,7 +68,7 @@ export default function UpdateProduct({ product, setUpdeting }: IProps) {
 
         if (getTitle.trim().length == 0) return alert('Título não preenchido');
         if (getDescription.trim().length == 0) return alert('Descrição não preenchida');
-        if (getPrice.trim().length == 0) return alert('Preço não preenchido');
+        if (String(getPrice).trim().length == 0) return alert('Preço não preenchido');
         if (getCategoryId == '0') return alert('Categoria não selecionada');
         if (String(getWeight).trim().length == 0) return alert('Peso não preenchido');
         if (String(getLength).trim().length == 0) return alert('Comprimento não preenchido');
@@ -172,7 +172,7 @@ export default function UpdateProduct({ product, setUpdeting }: IProps) {
                         <select id="product-category" value={getCategoryId} onChange={(event) => setCategoryId(event.target.value)}>
                             <option value="0"></option>
                             {getCategories.map( (category, index) => (
-                                <option key={index} value={`${category.id}`}>{category.id} - {category.name}</option>
+                                <option key={index} value={`${category.id}`}>{category.name}</option>
                             ))}
                         </select>
                     </div>
